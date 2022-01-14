@@ -799,7 +799,7 @@ class Client(object):
 
         return self._get('withdrawals/quotas', True, data=data)
 
-    def create_withdrawal(self, currency, amount, address, memo=None, is_inner=False, remark=None):
+    def create_withdrawal(self, currency, amount, address, memo=None, is_inner=False, remark=None, chain=None):
         """Process a withdrawal
 
         https://docs.kucoin.com/#apply-withdraw
@@ -816,7 +816,9 @@ class Client(object):
         :type is_inner: bool
         :param remark: (optional) Remark
         :type remark: string
-
+        :param chain: TRC20
+        :type chain: string
+        
         .. code:: python
 
             withdrawal = client.create_withdrawal('NEO', 20, '598aeb627da3355fa3e851')
@@ -845,6 +847,8 @@ class Client(object):
             data['isInner'] = is_inner
         if remark:
             data['remark'] = remark
+        if chain:
+            data['chain'] = chain
 
         return self._post('withdrawals', True, data=data)
 
